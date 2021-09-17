@@ -1,0 +1,8 @@
+__pycache__
+*.pyc
+venv
+virtualenv
+*.env
+*.flaskenv
+*.pyenv
+*.pipenv

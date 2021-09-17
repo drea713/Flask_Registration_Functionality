@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <h3>Home</h3>
+    {% if current_user.is_authenticated %}
+        <span> Hello, {{ current_user.first_name }} {{ current_user.last_name[0] }}.</span>
+    {% endif %}
+    <hr />
+
+    <form action="{{ url_for('home') }}" method="POST">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-10">
+                    <input class="form-control" type="text" name='body' placeholder="Your blog post here..." />
+                </div>
+                <div class="col-md-2">
+                    <input class="btn btn-info btn-block" type="submit" value="Post" />
+                </div>
+            </div>
+        </div>
+    </form>
+    
+    <hr />
+    
+    <ul class="list-group">
+        {% for p in posts %}
+            <li class="list-group-item">
+                <p>
+                    <!-- <a href="">{{ p['body'] }}</a> -->
+                    <a href="">{{ p.body }}</a>
+                </p>
+                <div>
+                    <span>
+                        <cite>&mdash; {{ p.user.first_name + ' ' + p.user.last_name }}</cite>
+                        <small class="float-right">{{ p.date_posted }} seconds ago</small>
+                    </span>
+            
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock content %}
